@@ -8,7 +8,7 @@ cd BayesDRM
 R CMD INSTALL .
 ```
 
-## 2-parameter emax - upper limit constrained to 1
+## 2-parameter emax - upper limit assumed to be unity 
 
 $$
 \begin{aligned}
