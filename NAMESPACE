@@ -1,5 +1,6 @@
 exportPattern("ˆ[[:alpha:]]+")
 export(drm_emax2_bin)
+export(drm_emax3_bin)
 import(Rcpp)
 import(methods)
 importFrom(rstan,sampling)
