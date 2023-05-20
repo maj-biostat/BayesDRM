@@ -1,9 +1,10 @@
 # names of stan models, multiple models would be: c("model1", "model2", ...)
-stanmodels <- c("drm01", "drm02")
+stanmodels <- c("drm01", "drm02", "drm03")
 
 # load each stan module
 Rcpp::loadModule("stan_fit4drm01_mod", what = TRUE)
 Rcpp::loadModule("stan_fit4drm02_mod", what = TRUE)
+Rcpp::loadModule("stan_fit4drm03_mod", what = TRUE)
 
 # instantiate each stanmodel object
 stanmodels <- sapply(stanmodels, function(model_name) {

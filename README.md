@@ -61,7 +61,6 @@ m <- as.matrix(f1, pars = c("p0", "b50", "p", "med", "yrep"))
 ```
 
 
-
 ## 3-parameter emax
 
 $$
@@ -116,6 +115,66 @@ ld <- list(N = K, y = y, n = rep(n, K), x = x,
 f1 <- BayesDRM::drm_emax3_bin(ld, refresh = 0)
 f1
 ```
+
+## 4-parameter emax
+
+Hill parameter is constrained by config, otherwise will usually be bimodal.
+
+$$
+\begin{aligned}
+y_i &\sim Binomial(n_i, p_i) \\
+p_i &= expit(\eta_i) \\
+\eta_i &= b_0 + b_2 * \frac{x_i^b_h}{x_i^b_h + b50^b_h} \\
+b_0 &\sim Normal(\mu_{b0}, \sigma_{b0}) \\
+b_{max} &\sim Normal(\mu_{bmax}, \sigma_{bmax}) \\
+b50 &\sim Normal^+(\mu_{b50}, \sigma_{b50}) \\
+b_h &\sim Normal(\mu_{b_h}, \sigma_{b_h}) \\
+b_2 &= b_{max} - b_0 \\
+\end{aligned}
+$$
+
+Simulate data under this model.
+
+```
+emax_4p <- function(x, b0, bmax, bh, b50){
+  b2 <- bmax - b0
+  eta <- b0 + b2 * x^bh / (x^bh + b50^bh)
+  plogis(eta)
+}
+
+b0 <- qlogis(0.15)
+bmax <- qlogis(0.95)
+b50 <- 7
+bh <- 3
+x <- c(0, 5, 10, 15, 20)
+p <- emax_4p(x, b0, bmax, bh, b50)
+p
+K <- length(p)
+# 30 obs per dose
+n <- 30
+y <- rbinom(K, n, p)
+
+plot(x, p, ylim = c(0, 1), type = "l")
+points(x, y/n)
+
+ld <- list(N = K, y = y, n = rep(n, K), x = x,
+           pri_b0_mu = -1.4, pri_b0_s = 2,
+           pri_b50_mu = 4, pri_b50_s = 3, 
+           pri_bmax_mu = 3, pri_bmax_s = 0.5,
+           pri_bh_mu = 1, pri_bh_s = 2,
+           # constrain hill to positive
+           pos_hill = 1, prior_only = F)
+f1 <- BayesDRM::drm_emax4_bin(ld, refresh = 0)
+f1
+```
+
+
+
+
+
+
+
+
 
 
 

@@ -8,3 +8,7 @@ drm_emax3_bin <- function(d, ...){
   return(out)
 }
 
+drm_emax4_bin <- function(d, ...){
+  out <- rstan::sampling(stanmodels$drm03, data = d, ...)
+  return(out)
+}
