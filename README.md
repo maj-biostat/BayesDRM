@@ -13,8 +13,9 @@ R CMD INSTALL .
 $$
 \begin{aligned}
 y_i &\sim Binomial(n_i, p_i) \\
+p_i &= p_0 + p_{emax} * \frac{x_i}{x_i + b50} \\
 p_0 &\sim Beta(a, b) \\
-p_emax &= 1 - p_0 \\
+p_{emax} &= 1 - p_0 \\
 b50 &\sim Normal(\mu_{b50}, \sigma_{b50})
 \end{aligned}
 $$
