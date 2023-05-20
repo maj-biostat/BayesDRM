@@ -124,7 +124,7 @@ $$
 \begin{aligned}
 y_i &\sim Binomial(n_i, p_i) \\
 p_i &= expit(\eta_i) \\
-\eta_i &= b_0 + b_2 * \frac{x_i^b_h}{x_i^b_h + b50^b_h} \\
+\eta_i &= b_0 + b_2 * \frac{x_i^{b_h}}{x_i^{b_h} + b50^{b_h}} \\
 b_0 &\sim Normal(\mu_{b0}, \sigma_{b0}) \\
 b_{max} &\sim Normal(\mu_{bmax}, \sigma_{bmax}) \\
 b50 &\sim Normal^+(\mu_{b50}, \sigma_{b50}) \\
