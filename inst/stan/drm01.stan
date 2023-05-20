@@ -29,8 +29,10 @@ model {
   }  
 }
 generated quantities{
+  int yrep[N];
   real med;
   med = b50 * (pr_med - p0) * inv(1 - p0);
+  yrep = binomial_rng(n, p);
 }
 
 
