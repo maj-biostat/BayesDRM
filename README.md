@@ -71,7 +71,7 @@ p_i &= inv_logit(\eta_i) \\
 \eta_i &= b_0 + b_2 * \frac{x_i}{x_i + b50} \\
 b_0 &\sim Normal(\mu_{b0}, \sigma_{b0}) \\
 b_{max} &\sim Normal(\mu_{bmax}, \sigma_{bmax}) \\
-b50 &\sim Normal^+(\mu_{b50}, \sigma_{b50})
+b50 &\sim Normal^+(\mu_{b50}, \sigma_{b50}) \\
 b_2 &= b_{max} - b_0 \\
 \end{aligned}
 $$
