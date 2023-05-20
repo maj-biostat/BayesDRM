@@ -8,6 +8,14 @@ cd BayesDRM
 R CMD INSTALL .
 ```
 
+## 2-parameter emax - upper limit constrained to 1
+
+$$
+\begin{aligned}
+y \sim Binomial(n, p) 
+\end{aligned}
+$$
+
 Simulate data under this model.
 
 ```
