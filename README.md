@@ -2,6 +2,8 @@
 
 Bayesian implementation of common dose response models using stan.
 
+## Installation
+
 ```
 git clone https://github.com/maj-biostat/BayesDRM.git
 cd BayesDRM
