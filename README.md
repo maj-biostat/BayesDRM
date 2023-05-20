@@ -43,7 +43,7 @@ ld <- list(N = K, y = y, n = rep(n, K), x = x,
            prior_only = F, pr_med = 0.8)
 f1 <- BayesDRM::drm_emax2_bin(ld, refresh = 0)
 f1
-m <- as.matrix(f1, pars = c("p0", "b50", "p", "med"))
+m <- as.matrix(f1, pars = c("p0", "b50", "p", "med", "yrep"))
 ```
 
 
