@@ -122,6 +122,46 @@ f1 <- BayesDRM::drm_emax3_bin(ld, refresh = 0)
 f1
 ```
 
+Smaller data set:
+
+
+```
+ld <- list(N = 5, 
+           y = c(4, 5, 5, 10, 10),
+           n = c(10, 10, 10, 10, 10), 
+           x = c(0, 3, 6, 12, 20),
+           pri_b0_mu = 0, pri_b0_s = 1.5,
+           pri_b50_mu = 4, pri_b50_s = 3, 
+           # note - a stronger prior on the upper will also force 
+           # down the lower bound.
+           pri_bmax_mu = 7, pri_bmax_s = 0.8,
+           pr_med = 0.8, prior_only = F)
+f1 <- BayesDRM::drm_emax3_bin(ld, refresh = 0)
+f1
+
+dfig <- data.table(as.matrix(f1, pars = "p"))
+dfig <- melt(dfig, measure.vars = names(dfig))
+dfig <- dfig[, .(
+  mu = mean(value),
+  q_025 = quantile(value, prob = 0.025),
+  q_975 = quantile(value, prob = 0.975)
+), keyby = variable]
+dfig[, x := gsub("p[", "", variable, fixed = T)]
+dfig[, x := as.integer(gsub("]", "", x, fixed = T))]
+dfig[, x := ld$x[x]]
+
+kableExtra::kable(dfig, format = "simple", digits = 2)
+
+variable      mu   q_025   q_975    x
+---------  -----  ------  ------  ---
+p[1]        0.22    0.08    0.42    0
+p[2]        0.61    0.42    0.78    3
+p[3]        0.82    0.69    0.92    6
+p[4]        0.94    0.89    0.98   12
+p[5]        0.98    0.95    0.99   20
+```
+
+
 ## 4-parameter emax
 
 Parameterised in terms of upper and lower asymptote.
