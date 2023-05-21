@@ -12,6 +12,9 @@ R CMD INSTALL .
 
 ## 2-parameter emax - upper limit assumed to be unity 
 
+Parameterised in terms of upper and lower asymptote.
+Emax parameter is derived.
+
 $$
 \begin{aligned}
 y_i &\sim Binomial(n_i, p_i) \\
@@ -62,6 +65,9 @@ m <- as.matrix(f1, pars = c("p0", "b50", "p", "med", "yrep"))
 
 
 ## 3-parameter emax
+
+Parameterised in terms of upper and lower asymptote.
+Emax parameter is derived.
 
 $$
 \begin{aligned}
@@ -118,6 +124,8 @@ f1
 
 ## 4-parameter emax
 
+Parameterised in terms of upper and lower asymptote.
+Emax parameter is derived.
 Hill parameter is constrained by config, otherwise will usually be bimodal.
 
 $$
