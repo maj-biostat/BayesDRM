@@ -12,7 +12,7 @@ R CMD INSTALL .
 
 ## Examples
 
-You will need stan installed along with `data.table`, `ggplot2` and `loo` to run some of these.
+You will need stan installed along with `data.table`, `ggplot2`, `kableExtra` and `loo` to run some of these.
 
 
 ### 2-parameter emax - upper limit assumed to be unity 
