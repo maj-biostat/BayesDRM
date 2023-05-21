@@ -139,7 +139,7 @@ Smaller data set:
 
 ```
 ld <- list(N = 5, 
-           y = c(4, 5, 5, 10, 10),
+           y = c(2, 4, 5, 9, 10),
            n = c(10, 10, 10, 10, 10), 
            x = c(0, 3, 6, 12, 20),
            pri_b0_mu = 0, pri_b0_s = 1.5,
@@ -150,6 +150,11 @@ ld <- list(N = 5,
            pr_med = 0.8, prior_only = F)
 f1 <- BayesDRM::drm_emax3_bin(ld, refresh = 0)
 f1
+
+log_lik_1 <- loo::extract_log_lik(f1, merge_chains = FALSE)
+r_eff <- relative_eff(exp(log_lik_1), cores = 2) 
+loo_1 <- loo(log_lik_1, r_eff = r_eff, cores = 2)
+print(loo_1)
 
 dfig <- data.table(as.matrix(f1, pars = "p"))
 dfig <- melt(dfig, measure.vars = names(dfig))
@@ -166,11 +171,11 @@ kableExtra::kable(dfig, format = "simple", digits = 2)
 
 variable      mu   q_025   q_975    x
 ---------  -----  ------  ------  ---
-p[1]        0.22    0.08    0.42    0
-p[2]        0.61    0.42    0.78    3
-p[3]        0.82    0.69    0.92    6
-p[4]        0.94    0.89    0.98   12
-p[5]        0.98    0.95    0.99   20
+p[1]        0.11    0.03    0.25    0
+p[2]        0.46    0.27    0.66    3
+p[3]        0.74    0.58    0.87    6
+p[4]        0.92    0.85    0.97   12
+p[5]        0.97    0.94    0.99   20
 ```
 
 
