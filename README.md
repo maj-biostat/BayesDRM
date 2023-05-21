@@ -10,7 +10,12 @@ cd BayesDRM
 R CMD INSTALL .
 ```
 
-## 2-parameter emax - upper limit assumed to be unity 
+## Examples
+
+You will need stan installed along with `data.table`, `ggplot2` and `loo` to run some of these.
+
+
+### 2-parameter emax - upper limit assumed to be unity 
 
 Parameterised in terms of upper and lower asymptote.
 Emax parameter is derived.
@@ -61,10 +66,17 @@ ld <- list(N = K, y = y, n = rep(n, K), x = x,
 f1 <- BayesDRM::drm_emax2_bin(ld, refresh = 0)
 f1
 m <- as.matrix(f1, pars = c("p0", "b50", "p", "med", "yrep"))
+
+# Leave one out cross validation:
+
+log_lik_1 <- loo::extract_log_lik(f1, merge_chains = FALSE)
+r_eff <- relative_eff(exp(log_lik_1), cores = 2) 
+loo_1 <- loo(log_lik_1, r_eff = r_eff, cores = 2)
+print(loo_1)
 ```
 
 
-## 3-parameter emax
+### 3-parameter emax
 
 Parameterised in terms of upper and lower asymptote.
 Emax parameter is derived.
@@ -162,7 +174,7 @@ p[5]        0.98    0.95    0.99   20
 ```
 
 
-## 4-parameter emax
+### 4-parameter emax
 
 Parameterised in terms of upper and lower asymptote.
 Emax parameter is derived.
@@ -215,18 +227,6 @@ ld <- list(N = K, y = y, n = rep(n, K), x = x,
 f1 <- BayesDRM::drm_emax4_bin(ld, refresh = 0)
 f1
 ```
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

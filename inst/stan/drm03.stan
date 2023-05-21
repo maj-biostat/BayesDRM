@@ -46,8 +46,10 @@ model {
 generated quantities{
   int yrep[N];
   vector[N] p;
+  vector[N] log_lik;
   p = inv_logit(eta);
   yrep = binomial_rng(n, inv_logit(eta));
+  for(i in 1:N) { log_lik[i] = binomial_lpmf(y[i] | n[i], p[i]); }
 }
 
 

@@ -36,9 +36,11 @@ generated quantities{
   int yrep[N];
   real med;
   vector[N] p;
+  vector[N] log_lik;
   p = inv_logit(eta);
   med = b50 * (eta_med - b0) .* inv(b2 - eta_med + b0);
   yrep = binomial_rng(n, inv_logit(eta));
+  for(i in 1:N) { log_lik[i] = binomial_lpmf(y[i] | n[i], p[i]); }
 }
 
 

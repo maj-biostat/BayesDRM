@@ -28,8 +28,10 @@ model {
 generated quantities{
   int yrep[N];
   real med;
+  vector[N] log_lik;
   med = b50 * (pr_med - p0) * inv(1 - p0);
   yrep = binomial_rng(n, p);
+  for(i in 1:N) { log_lik[i] = binomial_lpmf(y[i] | n[i], p[i]); }
 }
 
 
